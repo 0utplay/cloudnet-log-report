@@ -1,8 +1,6 @@
 package dev.playo.cloudnet.report.creator;
 
 import eu.cloudnetservice.common.io.FileUtil;
-import eu.cloudnetservice.common.log.LogManager;
-import eu.cloudnetservice.common.log.Logger;
 import eu.cloudnetservice.driver.service.ServiceEnvironmentType;
 import eu.cloudnetservice.node.service.CloudService;
 import java.io.IOException;
@@ -10,10 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public record ReportContext(@NonNull Path directory, @NonNull CloudService service) {
 
-  private static final Logger LOGGER = LogManager.logger(ReportContext.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ReportContext.class);
 
   public static @Nullable ReportContext create(@NonNull Path baseDir, @NonNull CloudService service) {
     var directory = baseDir
@@ -23,9 +23,8 @@ public record ReportContext(@NonNull Path directory, @NonNull CloudService servi
       .toAbsolutePath();
 
     if (Files.exists(directory)) {
-      LOGGER.fine(
-        "Unable to create log report directory for service %s the directory %s already exists",
-        null,
+      LOGGER.debug(
+        "Unable to create log report directory for service {} the directory {} already exists",
         service.serviceId().name(),
         directory);
       return null;
@@ -39,7 +38,7 @@ public record ReportContext(@NonNull Path directory, @NonNull CloudService servi
     try {
       Files.write(this.directory.resolve("consoleLog.txt"), this.service.cachedLogMessages());
     } catch (IOException exception) {
-      LOGGER.severe("Unable to report cached console log for service %s", exception, this.service.serviceId().name());
+      LOGGER.warn("Unable to report cached console log for service {}", this.service.serviceId().name(), exception);
     }
   }
 

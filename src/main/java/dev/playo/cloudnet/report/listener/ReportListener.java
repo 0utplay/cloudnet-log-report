@@ -2,19 +2,15 @@ package dev.playo.cloudnet.report.listener;
 
 import dev.playo.cloudnet.report.configuration.ReportConfiguration;
 import dev.playo.cloudnet.report.creator.ReportContext;
-import eu.cloudnetservice.common.log.LogManager;
 import eu.cloudnetservice.driver.event.EventListener;
 import eu.cloudnetservice.driver.service.ServiceLifeCycle;
 import eu.cloudnetservice.node.event.service.CloudServicePreForceStopEvent;
 import eu.cloudnetservice.node.event.service.CloudServicePreLifecycleEvent;
 import eu.cloudnetservice.node.service.CloudService;
 import java.nio.file.Path;
-import java.util.logging.Logger;
 import lombok.NonNull;
 
 public final class ReportListener {
-
-  private static final Logger LOGGER = LogManager.logger(ReportListener.class);
 
   private final Path reportDestination;
   private final ReportConfiguration reportConfiguration;
