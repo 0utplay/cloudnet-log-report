@@ -7,8 +7,8 @@ group = "dev.playo"
 version = "1.0-SNAPSHOT"
 
 tasks.withType<JavaCompile> {
-  sourceCompatibility = JavaVersion.VERSION_22.toString()
-  targetCompatibility = JavaVersion.VERSION_22.toString()
+  sourceCompatibility = JavaVersion.VERSION_23.toString()
+  targetCompatibility = JavaVersion.VERSION_23.toString()
 }
 
 repositories {
@@ -18,10 +18,10 @@ repositories {
 }
 
 dependencies {
-  annotationProcessor("org.projectlombok:lombok:1.18.34")
+  annotationProcessor("org.projectlombok:lombok:1.18.36")
 
-  moduleLibrary("org.projectlombok:lombok:1.18.34")
-  implementation("eu.cloudnetservice.cloudnet:node:4.0.0-RC11-SNAPSHOT")
+  moduleLibrary("org.projectlombok:lombok:1.18.36")
+  implementation("eu.cloudnetservice.cloudnet:node:4.0.0-RC11.2")
 }
 
 moduleJson {
