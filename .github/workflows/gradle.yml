@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '23'
 
       - name: Execute gradle build
         uses: gradle/gradle-build-action@v2
